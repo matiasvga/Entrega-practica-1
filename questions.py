@@ -31,9 +31,12 @@ while attempts > 0:
 
     print(f"Intentos restantes: {attempts}")
     print(f"Letras usadas: {', '.join(guessed)}")
+
     letter = input("Ingresá una letra: ")
-    while not (letter in ascii_list):
-        letter = input("Caracter inválido. Ingresar otro: ")
+    if not (letter in ascii_list):
+        print("Entrada no válida.")
+        print("")
+        continue
     if letter in guessed:
         print("Ya usaste esa letra.")
     elif letter in word:
