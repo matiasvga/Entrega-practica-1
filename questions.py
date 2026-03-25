@@ -2,19 +2,33 @@ import random
 import string
 
 ascii_string = string.ascii_lowercase
-ascii_list = [x for x in ascii_string]
+ascii_list = [letter for letter in ascii_string]
 
-words = [
-    "python", "programa", "variable", "funcion",
-    "bucle", "cadena", "entero", "lista",
-]
+categories = {"Programación": ["python", "programa", "variable", "funcion",
+                               "bucle", "cadena", "entero", "lista"],
+              "Paises": ["argentina", "brasil", "estados unidos", "españa", 
+                         "francia", "rusia", "suiza", "japon", "australia"],
+              "Sistemas operativos": ["windows", "linux", "macos", "android"],
+              "Marcas de auto": ["ford", "chevrolet", "volkswagen", "renault"],
+}
 
-word = random.choice(words)
 guessed = []
 attempts = 6
 score = 6
+
+# Menú de selección de categoría
 print("¡Bienvenido al Ahorcado!")
-print()
+print("Seleccione una de las categorías de palabras:")
+for category in categories:
+    print(f"\t- {category}")
+
+selected = input()
+while not(selected in categories):
+    print("Categoría inválida. Intente nuevamente:")
+    selected = input()
+else:
+    word = random.choice(categories[selected])
+
 while attempts > 0:
     # Mostrar progreso: letras adivinadas y guiones para las que faltan
     progress = ""
@@ -35,7 +49,7 @@ while attempts > 0:
     print(f"Letras usadas: {', '.join(guessed)}")
 
     letter = input("Ingresá una letra: ")
-    if not (letter in ascii_list):
+    if not(letter in ascii_list):
         print("Entrada no válida.")
         print("")
         continue
