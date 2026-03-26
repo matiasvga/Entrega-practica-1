@@ -9,7 +9,7 @@ empty = False
 
 categories = {"Programación": ["python", "programa", "variable", "funcion",
                                "bucle", "cadena", "entero", "lista"],
-              "Paises": ["argentina", "brasil", "estados unidos", "españa", 
+              "Paises": ["argentina", "brasil", "canada", "españa", 
                          "francia", "rusia", "suiza", "japon", "australia"],
               "Sistemas operativos": ["windows", "linux", "macos", "android"],
               "Marcas de auto": ["ford", "chevrolet", "volkswagen", "renault"],
