@@ -5,6 +5,7 @@ ascii_string = string.ascii_lowercase
 ascii_list = [letter for letter in ascii_string]
 ascii_list.append("ñ")
 finish = False
+empty = False
 
 categories = {"Programación": ["python", "programa", "variable", "funcion",
                                "bucle", "cadena", "entero", "lista"],
@@ -25,13 +26,14 @@ while not(selected in categories):
     print("Categoría inválida. Intente nuevamente:")
     selected = input()
 else:
-    word = random.choice(categories[selected])
+    words = categories[selected].copy()
 
 # Lógica del juego
-while not finish:
+while (not empty)and(not finish):
     guessed = []
     attempts = 6
     score = 6
+    word = random.choice(words)
 
     while attempts > 0:
         # Mostrar progreso: letras adivinadas y guiones para las que faltan
@@ -52,11 +54,13 @@ while not finish:
         print(f"Intentos restantes: {attempts}")
         print(f"Letras usadas: {', '.join(guessed)}")
 
+        # Verifica si el caracter ingresado es válido
         letter = input("Ingresá una letra: ")
         if not(letter in ascii_list):
             print("Entrada no válida.")
             print("")
             continue
+        
         if letter in guessed:
             print("Ya usaste esa letra.")
         elif letter in word:
@@ -72,11 +76,20 @@ while not finish:
     else:
         print(f"¡Perdiste! La palabra era: {word}")
         print(f"Puntaje: {score}")
-    
-    round = input("¿Querés otra ronda?\n - Si \n - No\n ")
-    match round:
-        case "SI"|"Si"|"si":
-            finish = False
-        case "NO"|"No"|"no":
-            finish = True
+        print()
+    # FIN DE LA RONDA
+    words.remove(word)
+    if len(words) == 0:
+        # Si ya no quedan palabras termina el juego
+        empty = True
+        print("¡Se terminaron las palabras!")
+    else:
+        # Pregunta si seguir o terminar el juego
+        round = input("¿Querés otra ronda?\n - Si \n - No\n ")
+        match round:
+            case "SI"|"Si"|"si":
+                finish = False
+            case "NO"|"No"|"no":
+                finish = True
+
 print("Gracias por jugar (๑•᎑•๑)")
